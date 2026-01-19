@@ -1,20 +1,16 @@
-function getEmSize() {
-  const el = document.createElement("div");
-  el.style.width = "1em";
-  el.style.position = "absolute";
-  el.style.visibility = "hidden";
-  document.body.appendChild(el);
-  const em = el.offsetWidth;
-  el.remove();
-  return em * 0.5;
-}
-
 function generateBinaryForViewport() {
-  const em = getEmSize();
-  const lineHeight = em * 1.2;
+  const lineHeight = 20; // in pixels
+  const textWidth = 8.5; // in pixels
 
-  const cols = Math.floor(window.innerWidth / em);
-  const rows = Math.floor(window.innerHeight / lineHeight);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
+
+  console.log(`Viewport size: ${width}px x ${height}px`);
+
+  const cols = Math.floor(width / textWidth);
+  const rows = Math.floor(height / lineHeight);
+
+  console.log(`Generating binary for ${cols} cols and ${rows} rows`);
 
   let output = "";
 
@@ -33,11 +29,13 @@ function generateBinary() {
 
 function updateBinary() {
   const binaryContent = generateBinary();
-  //   console.log(binaryContent);
   document.documentElement.style.setProperty("--binary", `"${binaryContent}"`);
 }
 
 updateBinary();
+window.addEventListener("resize", () => {
+  updateBinary();
+});
 
 const dialog = document.getElementById("userTypeDialog");
 const mainContainer = document.getElementById("main-container");
