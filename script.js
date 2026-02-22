@@ -73,7 +73,7 @@ function loadServices(type) {
     .map(
       (service) => `
       <a 
-        href="mailto:binary.execution.dev@gmail.com?subject=${encodeURIComponent(service.subject)}&body=${encodeURIComponent(service.description)}" 
+        href="mailto:binary.execution.dev?subject=${encodeURIComponent(service.subject)}&body=${encodeURIComponent(service.description)}" 
         class="service-btn"
       >
         ${service.title}
