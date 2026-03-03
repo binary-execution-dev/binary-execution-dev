@@ -82,3 +82,31 @@ function loadServices(type) {
     )
     .join("");
 }
+
+const letters = "01";
+const elements = document.querySelectorAll(".binary-text");
+
+elements.forEach((el, index) => {
+  const finalText = el.getAttribute("data-text");
+  let iteration = 0;
+
+  setTimeout(() => {
+    const interval = setInterval(() => {
+      el.innerText = finalText
+        .split("")
+        .map((letter, i) => {
+          if (i < iteration) {
+            return finalText[i];
+          }
+          return letters[Math.floor(Math.random() * 2)];
+        })
+        .join("");
+
+      if (iteration >= finalText.length) {
+        clearInterval(interval);
+      }
+
+      iteration += 1 / 3; // speed control
+    }, 30);
+  }, index * 1500); // delay between lines
+});
